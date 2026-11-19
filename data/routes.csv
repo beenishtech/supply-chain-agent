@@ -1,0 +1,10 @@
+origin_region,destination,mode,via,transit_days,cost_multiplier,reliability
+China,Karachi,Sea,Karachi,25,1.0,0.7
+China,Karachi,Air,Karachi Airport,4,6.5,0.92
+China,Karachi,Sea+Road,Gwadar,30,1.3,0.8
+UAE,Karachi,Sea,Karachi,6,1.2,0.85
+UAE,Karachi,Air,Karachi Airport,2,5.0,0.95
+UAE,Karachi,Sea+Road,Gwadar,8,1.4,0.82
+India,Karachi,Sea,Karachi,5,1.0,0.75
+India,Karachi,Air,Karachi Airport,2,6.0,0.93
+India,Karachi,Sea+Road,Gwadar,9,1.4,0.7

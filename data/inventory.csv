@@ -1,0 +1,6 @@
+sku,item_name,stock,daily_demand,reorder_level
+SKU-A,Cotton Fabric,300,60,200
+SKU-B,Dyes,90,10,40
+SKU-C,Machine Parts,150,40,120
+SKU-D,Packaging,600,50,200
+SKU-E,Thread,40,20,50

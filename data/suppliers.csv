@@ -1,0 +1,11 @@
+supplier_id,name,country,sku,unit_price_usd,lead_time_days,reliability,status,capacity_units
+SUP-1,Shanghai Textiles,China,SKU-A,5.0,25,0.75,Active,1000.0
+SUP-1,Shanghai Textiles,China,SKU-C,88.0,25,0.75,Active,1500.0
+SUP-2,Dubai Chem Trading,UAE,SKU-B,12.0,5,0.9,Active,200.0
+SUP-3,Istanbul Pack Co,Turkey,SKU-D,3.0,8,0.85,Active,500.0
+SUP-4,Mumbai Fabrics,India,SKU-A,4.5,14,0.7,Active,600.0
+SUP-6,Lahore Local Mills,Pakistan,SKU-A,6.5,4,0.88,Active,300.0
+SUP-6,Lahore Local Mills,Pakistan,SKU-E,2.0,3,0.88,Active,400.0
+SUP-7,Dhaka Fabrics,Bangladesh,SKU-A,,12,0.8,Active,
+SUP-8,Guangzhou Machinery,China,SKU-C,95.0,18,0.82,Active,800.0
+SUP-9,Gulf Parts FZE,UAE,SKU-C,110.0,6,0.91,Active,500.0

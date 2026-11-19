@@ -1,0 +1,5 @@
+order_id,customer_id,priority,deadline,sku,qty,order_value_usd
+ORD-1,CUST-1,High,2026-11-26,SKU-A,400,18000
+ORD-2,CUST-2,Medium,2026-11-26,SKU-B,60,4000
+ORD-3,CUST-3,High,2026-11-29,SKU-C,700,65000
+ORD-4,CUST-4,Low,2026-12-05,SKU-A,200,9000

@@ -1,0 +1,7 @@
+shipment_id,origin,destination,mode,status,eta,value_usd,sku,qty,supplier_id,customer_id
+SH001,Shanghai,Karachi,Sea,Delayed,2026-11-25,45000,SKU-A,500,SUP-1,CUST-1
+SH002,Dubai,Lahore,Air,In Transit,2026-11-21,12000,SKU-B,120,SUP-2,CUST-2
+SH003,Shenzhen,Karachi,Sea,Stuck at Port,2026-11-28,80000,SKU-C,900,SUP-1,CUST-3
+SH004,Istanbul,Islamabad,Air,In Transit,2026-11-22,30000,SKU-D,300,SUP-3,CUST-1
+SH005,Mumbai,Karachi,Sea,Stuck at Port,2026-11-27,22000,SKU-A,250,SUP-4,CUST-4
+SH006,Karachi,Faisalabad,Road,On Time,2026-11-20,9000,SKU-E,80,SUP-5,CUST-2

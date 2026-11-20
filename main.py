@@ -7,6 +7,7 @@
   python main.py --scenario port_strike --inject-failure logistics        (agent fails once, retry works)
   python main.py --scenario port_strike --inject-failure logistics:hard   (agent stays down, fallback)
   python main.py --scenario port_strike --no-llm                          (force offline mode)
+  python main.py --scenario port_strike --engine crewai                   (use CrewAI; needs a Gemini/Groq key)
 """
 import argparse
 import sys
@@ -30,8 +31,18 @@ def printer(m):
 def run_one(name, args):
     sc = SCENARIOS[name]
     print("\n" + "=" * 100 + f"\nSCENARIO: {sc['title']}\n" + "=" * 100)
-    coord = Coordinator(LLM(enabled=not args.no_llm), printer=None if args.quiet else printer,
-                        approval=args.approve, inject_failure=args.inject_failure)
+    llm = LLM(enabled=not args.no_llm)
+    kwargs = dict(printer=None if args.quiet else printer, approval=args.approve,
+                  inject_failure=args.inject_failure)
+    if args.engine == "crewai":
+        try:
+            from crew_engine import CrewCoordinator
+            coord = CrewCoordinator(llm, **kwargs)
+        except ImportError as e:
+            print(f"!! CrewAI not installed ({e}). Run: pip install crewai   -> using native engine.")
+            coord = Coordinator(llm, **kwargs)
+    else:
+        coord = Coordinator(llm, **kwargs)
     run = coord.run(sc)
     OUT.mkdir(exist_ok=True)
     md = build_markdown(run)
@@ -52,6 +63,8 @@ def main():
     ap.add_argument("--list", action="store_true")
     ap.add_argument("--approve", choices=["pending", "approve", "ask", "reject"], default="pending")
     ap.add_argument("--inject-failure", help="e.g. logistics | logistics:hard | supplier")
+    ap.add_argument("--engine", choices=["native", "crewai"], default="native",
+                    help="native = built-in orchestrator, crewai = CrewAI agents/tasks/crews")
     ap.add_argument("--no-llm", action="store_true")
     ap.add_argument("--quiet", action="store_true", help="hide the agent message log")
     args = ap.parse_args()

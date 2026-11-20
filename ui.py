@@ -67,6 +67,8 @@ with st.sidebar:
                             value="Cyclone warning for Karachi: port and airport operations restricted for 4 days.")
         scenario = {"title": "Custom disruption", "description": "Signal entered manually",
                     "signals": [{"source": "Manual input", "text": text}]}
+    engine = st.radio("Engine", ["Native", "CrewAI"], horizontal=True,
+                      help="CrewAI needs `pip install crewai` and a Gemini/Groq key in .env")
     use_llm = st.toggle("Use LLM (Gemini / Groq)", value=True)
     fail_label = st.selectbox("Failure injection (resilience demo)",
                               ["None", "Logistics fails once (retry)", "Logistics down (fallback)"])
@@ -81,7 +83,16 @@ st.markdown('<div class="hero"><h1>🚚 Supply Chain Crisis Command Center</h1>'
 if run_btn:
     with st.spinner("Agents are working..."):
         try:
-            coord = Coordinator(LLM(enabled=use_llm), printer=None, approval="pending", inject_failure=fail)
+            llm = LLM(enabled=use_llm)
+            if engine == "CrewAI":
+                try:
+                    from crew_engine import CrewCoordinator
+                    coord = CrewCoordinator(llm, printer=None, approval="pending", inject_failure=fail)
+                except ImportError as e:
+                    st.warning(f"CrewAI engine could not load: {e}. Running the native engine instead.")
+                    coord = Coordinator(llm, printer=None, approval="pending", inject_failure=fail)
+            else:
+                coord = Coordinator(llm, printer=None, approval="pending", inject_failure=fail)
             st.session_state.run = coord.run(scenario)
             st.session_state.decision = None
         except Exception as e:
@@ -89,7 +100,7 @@ if run_btn:
             st.stop()
 
 if "run" not in st.session_state:
-    st.info("Sidebar se scenario chunein aur **Run agents** dabayein.")
+    st.info("Select a scenario from the sidebar and click **Run agents**.")
     st.stop()
 
 run = st.session_state.run
